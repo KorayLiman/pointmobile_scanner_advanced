@@ -37,6 +37,8 @@ class _MyAppState extends State<MyApp> {
     await PMScanner.initScanner(resultType: ResultType.clipboardKeycodePaste);
     await PMScanner.setDecodeMode(decodeMode: DecodeMode.fixedFocus);
     await PMScanner.setBeepEnabled(beepEnabled: true);
+    await PMScanner.setCenterWindowTolerance(tolerance: 30);
+    final timeout = await PMScanner.getTriggerTimeout();
     final decodeDelay = await PMScanner.getDecodeDelay();
     final barcodeScanNumber = await PMScanner.getNumberOfBarcodesToScan();
     await PMScanner.resetAllSettingsToDefault();

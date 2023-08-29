@@ -30,30 +30,40 @@ Initialize scanner first
 * If you set ResultType to ResultType.clipboardKeycodePaste and wanna be able to get scanned barcode
 ```dart
 // TO LISTEN
-  PMUtils.listenClipboard();
+await PMUtils.listenClipboard();
 // TO STOP LISTENING
-  PMUtils.stopListeningClipboard();
+await PMUtils.stopListeningClipboard();
 // TO CLEAR CLIPBOARD
-  PMUtils.clearClipboard();
+await PMUtils.clearClipboard();
 // TO CLEAR CLIPBOARD WITHOUT LISTENING
-  PMUtils.clearClipboardWithoutListening();
+await PMUtils.clearClipboardWithoutListening();
 ```
 * Your custom function
 ```dart
   void _onDecode(String symbology, String barcodeNumber) {
-    print("$symbology --- $barcodeNumber");
-  }
+  print("$symbology --- $barcodeNumber");
+}
 ```
-## CONFIGURING SCANNER SETTINGS
-Pointmobile Scanner Advanced package offers lots of functions to configure scanner settings. Here some of them:
+## Configuring Scanner Settings
+Pointmobile Scanner Advanced package offers many amount of functions to configure scanner settings. Here are some of them:
 ```dart
     await PMScanner.setDecodeMode(decodeMode: DecodeMode.fixedFocus);
     await PMScanner.setBeepEnabled(beepEnabled: true);
+    await PMScanner.resetAllSettingsToDefault();
+    await PMScanner.setCenterWindowTolerance(tolerance: 30);
     final decodeDelay = await PMScanner.getDecodeDelay();
     final barcodeScanNumber = await PMScanner.getNumberOfBarcodesToScan();
-    await PMScanner.resetAllSettingsToDefault();
-
+    final timeout = await PMScanner.getTriggerTimeout();
 ```
 * For more please see the PMScanner class.
 
-##
+## Authors
+
+- [Koray Liman](https://github.com/KorayLiman)
+
+## Roadmap
+
+- Scanner state listener
+
+- Set/Get Good and Bad Read File
+
