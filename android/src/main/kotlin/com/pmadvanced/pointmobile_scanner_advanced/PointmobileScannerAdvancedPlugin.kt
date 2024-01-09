@@ -55,6 +55,7 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
         private var mScanResultReceiver: ScanResultReceiver? = null
         const val TAG = "PMAdvanced"
         const val onDecode = "onDecode";
+
         // var customIntentCategory = "android.intent.category.DEFAULT"
         const val onClipboardPaste = "onClipboardPaste";
         private var listener: ClipboardManager.OnPrimaryClipChangedListener? = null
@@ -147,7 +148,12 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-        if (!isDevicePointMobile()) {
+        if (call.method == "isDevicePointMobile") {
+            result.success(isDevicePointMobile(result))
+            return
+        }
+
+        if (!isDevicePointMobile(result)) {
             result.error(
                 "Device Type Error",
                 "-----THIS PLUGIN MEANT TO BE USED IN POINTMOBILE DEVICES----",
@@ -981,13 +987,14 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
         }
     }
 
-    private fun isDevicePointMobile(): Boolean {
+    private fun isDevicePointMobile(result: Result): Boolean {
         var majorNumber = ""
         try {
             majorNumber = DeviceServer.getIDeviceService().majorNumber.toString()
         } catch (e: Throwable) {
             e.printStackTrace()
         }
+        result.success(majorNumber != "")
         return majorNumber != ""
     }
 

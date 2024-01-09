@@ -33,6 +33,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _runExampleScannerUtils() async {
+    if (!await PMScanner.isDevicePointMobile()) {
+      return;
+    }
     // INIT SCANNER FIRST
     await PMScanner.initScanner(resultType: ResultType.clipboardKeycodePaste);
     await PMScanner.setDecodeMode(decodeMode: DecodeMode.fixedFocus);

@@ -1,3 +1,8 @@
+## 0.0.5
+
+* Added isDevicePointMobile control method
+
+
 ## 0.0.4
 
 * Updated description

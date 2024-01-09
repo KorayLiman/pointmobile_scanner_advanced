@@ -47,6 +47,5 @@ android {
 }
 
 dependencies {
-    testImplementation files('fltr/flutter.jar')
     implementation files('scanner_sdk/device.sdk.jar')
 }
