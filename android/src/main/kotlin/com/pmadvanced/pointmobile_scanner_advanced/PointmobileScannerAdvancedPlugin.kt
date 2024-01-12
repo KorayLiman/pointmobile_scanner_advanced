@@ -148,12 +148,14 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+        Log.d(TAG, call.method)
         if (call.method == "isDevicePointMobile") {
-            result.success(isDevicePointMobile(result))
+            result.success(isDevicePointMobileRaw(result))
             return
         }
 
-        if (!isDevicePointMobile(result)) {
+        if (!isDevicePointMobileRaw(result)) {
+            Log.d(TAG, "Device is not a PDA")
             result.error(
                 "Device Type Error",
                 "-----THIS PLUGIN MEANT TO BE USED IN POINTMOBILE DEVICES----",
@@ -886,7 +888,6 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
                 } else {
                     Log.d(TAG, "Copied value: $copiedValue")
                 }
-
                 mChannel.invokeMethod(onClipboardPaste, copiedValue)
 
             }
@@ -987,16 +988,17 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
         }
     }
 
-    private fun isDevicePointMobile(result: Result): Boolean {
+
+    private fun isDevicePointMobileRaw(result: Result): Boolean {
         var majorNumber = ""
         try {
             majorNumber = DeviceServer.getIDeviceService().majorNumber.toString()
         } catch (e: Throwable) {
             e.printStackTrace()
         }
-        result.success(majorNumber != "")
         return majorNumber != ""
     }
+
 
 
 }

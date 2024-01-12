@@ -1,3 +1,12 @@
+## 0.0.7
+
+* [FIX] 'isDevicePointMobile' now also checks if device is Android
+
+
+## 0.0.6
+
+* [FIX] Fixes result already submitted error
+
 ## 0.0.5
 
 * Added isDevicePointMobile control method

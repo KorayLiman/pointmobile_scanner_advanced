@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/services.dart';
 
 // ignore_for_file: constant_identifier_names
@@ -42,6 +44,7 @@ abstract class PMScanner {
 
   /// CHECKS IF DEVICE IS POINT MOBILE
   static Future<bool> isDevicePointMobile() async {
+    if (!Platform.isAndroid) return false;
     return await _channel.invokeMethod("isDevicePointMobile");
   }
 
