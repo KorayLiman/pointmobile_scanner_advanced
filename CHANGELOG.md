@@ -1,7 +1,11 @@
+## 0.0.8
+
+* [FIX] Changed symbology return type(String to enum)
+* [FIX] Added symbology type for resultType ClipboardKeyCodePaste
+
 ## 0.0.7
 
 * [FIX] 'isDevicePointMobile' now also checks if device is Android
-
 
 ## 0.0.6
 
@@ -11,7 +15,6 @@
 
 * Added isDevicePointMobile control method
 
-
 ## 0.0.4
 
 * Updated description
@@ -20,11 +23,9 @@
 
 * Function documentations are improved
 
-
 ## 0.0.2
 
 * Documentation update
-
 
 ## 0.0.1
 

@@ -38,13 +38,14 @@ class _MyAppState extends State<MyApp> {
     }
     // INIT SCANNER FIRST
     await PMScanner.initScanner(resultType: ResultType.clipboardKeycodePaste);
-    await PMScanner.setDecodeMode(decodeMode: DecodeMode.fixedFocus);
-    await PMScanner.setBeepEnabled(beepEnabled: true);
-    await PMScanner.setCenterWindowTolerance(tolerance: 30);
-    final timeout = await PMScanner.getTriggerTimeout();
-    final decodeDelay = await PMScanner.getDecodeDelay();
-    final barcodeScanNumber = await PMScanner.getNumberOfBarcodesToScan();
-    await PMScanner.resetAllSettingsToDefault();
+    // await PMScanner.setDecodeMode(decodeMode: DecodeMode.fixedFocus);
+    // await PMScanner.setBeepEnabled(beepEnabled: true);
+    // await PMScanner.setCenterWindowTolerance(tolerance: 30);
+    await PMUtils.listenClipboard();
+    // final timeout = await PMScanner.getTriggerTimeout();
+    // final decodeDelay = await PMScanner.getDecodeDelay();
+    // final barcodeScanNumber = await PMScanner.getNumberOfBarcodesToScan();
+    // await PMScanner.resetAllSettingsToDefault();
 
     /*
     IF YOU SET RESULTTYPE TO CLIPBOARDKEYCODEPASTE
@@ -57,7 +58,7 @@ class _MyAppState extends State<MyApp> {
     PMScanner.onDecode = _onDecode;
   }
 
-  void _onDecode(String symbology, String barcodeNumber) {
+  void _onDecode(Symbology symbology, String barcodeNumber) {
     print("$symbology --- $barcodeNumber");
   }
 }

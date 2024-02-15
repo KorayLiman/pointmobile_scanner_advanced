@@ -61,7 +61,7 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
         private var listener: ClipboardManager.OnPrimaryClipChangedListener? = null
         fun onDecode(decodeResult: DecodeResult) {
             val alDecodeResult = ArrayList<String>()
-            alDecodeResult.add(decodeResult.symName)
+            alDecodeResult.add(decodeResult.symType.toString())
             alDecodeResult.add(decodeResult.toString())
             Log.d(TAG, alDecodeResult.toString())
             mChannel.invokeMethod(onDecode, alDecodeResult)
@@ -887,8 +887,16 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
                     Log.d(TAG, "Copied value: null")
                 } else {
                     Log.d(TAG, "Copied value: $copiedValue")
+                    mDecodeResult = DecodeResult()
+                    mScanner?.aDecodeGetResult(mDecodeResult)
+                    val res = ArrayList<String?>()
+                    res.add(mDecodeResult.symType.toString())
+                    res.add(copiedValue)
+
+
+                    mChannel.invokeMethod(onClipboardPaste, res, )
                 }
-                mChannel.invokeMethod(onClipboardPaste, copiedValue)
+
 
             }
             clipboardManager.addPrimaryClipChangedListener(listener)
@@ -998,7 +1006,6 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
         }
         return majorNumber != ""
     }
-
 
 
 }

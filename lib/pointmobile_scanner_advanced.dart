@@ -23,21 +23,92 @@ enum Inverse1DMode { regularTypeOnly, inverseTypeOnly, inverseAutoDetect }
 
 enum GroupSeparator { SOH, STX, EXT, EOT, ENQ, ACK, BEL, BS, HT, LF, VT, FF, CR, SO, SI, DLE, DC1, DC2, DC3, DC4, NAK, SYN, ETB, CAN, EM, SUB, ESC, FS, GS, RS, US }
 
-enum Symbology { NIL, AIRLINE_2OF5_13_DIGIT, AIRLINE_2OF5_15_DIGIT, AZTEC, AUSTRALIAN_POSTAL, BOOKLAND_EAN, BPO, CANPOST, CHINAPOST, CHINESE_2OF5, CODABAR, CODABLOCK, CODE11, CODE128, CODE16K, CODE32, CODE39, CODE49, CODE93, COMPOSITE, COUPON_CODE, DATAMATRIX, DISCRETE_2OF5, DUTCH_POSTAL, EAN128, EAN13, EAN8, GS1_DATABAR_14, GS1_DATABAR_EXPANDED, GS1_DATABAR_LIMITED, HONGKONG_2OF5, IATA_2OF5, IDTAG, INTERLEAVED_2OF5, ISBT128, JAPANESE_POSTAL, KOREAN_POSTAL, MATRIX_2OF5, MAXICODE, MESA, MICRO_PDF417, MICRO_QR, MSI, NEC_2OF5, OCR, PDF417, PLESSEY, POSICODE, POST_US4, QR, STRAIGHT_2OF5, STANDARD_2OF5, TELEPEN, TLCODE39, TRIOPTIC, UK_POSTAL, UPCA, UPCE, UPCE1, US_PLANET, US_POSTNET, USPS_4CB, RSS, LABEL, HANXIN, GRIDMATRIX, INFO_MAIL, INTELLIGENT_MAIL, SWEDENPOST, LAST }
+enum Symbology {
+  NIL,
+  AIRLINE_2OF5_13_DIGIT,
+  AIRLINE_2OF5_15_DIGIT,
+  AZTEC,
+  AUSTRALIAN_POSTAL,
+  BOOKLAND_EAN,
+  BPO,
+  CANPOST,
+  CHINAPOST,
+  CHINESE_2OF5,
+  CODABAR,
+  CODABLOCK,
+  CODE11,
+  CODE128,
+  CODE16K,
+  CODE32,
+  CODE39,
+  CODE49,
+  CODE93,
+  COMPOSITE,
+  COUPON_CODE,
+  DATAMATRIX,
+  DISCRETE_2OF5,
+  DUTCH_POSTAL,
+  EAN128,
+  EAN13,
+  EAN8,
+  GS1_DATABAR_14,
+  GS1_DATABAR_EXPANDED,
+  GS1_DATABAR_LIMITED,
+  HONGKONG_2OF5,
+  IATA_2OF5,
+  IDTAG,
+  INTERLEAVED_2OF5,
+  ISBT128,
+  JAPANESE_POSTAL,
+  KOREAN_POSTAL,
+  MATRIX_2OF5,
+  MAXICODE,
+  MESA,
+  MICRO_PDF417,
+  MICRO_QR,
+  MSI,
+  NEC_2OF5,
+  OCR,
+  PDF417,
+  PLESSEY,
+  POSICODE,
+  POST_US4,
+  QR,
+  STRAIGHT_2OF5,
+  STANDARD_2OF5,
+  TELEPEN,
+  TLCODE39,
+  TRIOPTIC,
+  UK_POSTAL,
+  UPCA,
+  UPCE,
+  UPCE1,
+  US_PLANET,
+  US_POSTNET,
+  USPS_4CB,
+  RSS,
+  LABEL,
+  HANXIN,
+  GRIDMATRIX,
+  INFO_MAIL,
+  INTELLIGENT_MAIL,
+  SWEDENPOST,
+  LAST,
+}
 
 abstract class PMScanner {
   static const String _onDecode = "onDecode";
   static const String _onClipboardPaste = "onClipboardPaste";
-  static Function(String symbology, String barcodeNumber)? onDecode;
+  static Function(Symbology symbology, String barcodeNumber)? onDecode;
 
   static Future<void> _handler(MethodCall call) async {
     if (call.method == _onDecode) {
       if (onDecode != null) {
-        onDecode!(call.arguments[0], call.arguments[1]);
+        onDecode!(Symbology.values[int.parse(call.arguments[0])], call.arguments[1]);
       }
     } else if (call.method == _onClipboardPaste) {
       if (onDecode != null) {
-        onDecode!("no_symbology_data", call.arguments);
+        onDecode!(Symbology.values[int.parse(call.arguments[0])], call.arguments[1]);
       }
     }
   }
@@ -305,7 +376,7 @@ abstract class PMScanner {
     return await _channel.invokeMethod("getSymEnable", {"symId": symbology.index});
   }
 
-  static Future<int> getTriggerTimeout() async {
+  static Future<double> getTriggerTimeout() async {
     return (await _channel.invokeMethod("getTriggerTimeout")) / 1000;
   }
 
