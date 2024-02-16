@@ -1,3 +1,7 @@
+## 0.0.9
+
+* Updated Readme
+
 ## 0.0.8
 
 * [FIX] Changed symbology return type(String to enum)

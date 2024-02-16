@@ -40,7 +40,7 @@ await PMUtils.clearClipboardWithoutListening();
 ```
 * Your custom function
 ```dart
-  void _onDecode(String symbology, String barcodeNumber) {
+  void _onDecode(Symbology symbology, String barcodeNumber) {
   print("$symbology --- $barcodeNumber");
 }
 ```
