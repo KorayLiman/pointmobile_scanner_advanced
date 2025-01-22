@@ -29,5 +29,3 @@ migrate_working_dir/
 .packages
 build/
 android/fltr/
-android/local.properties
-android/pointmobile_scanner_advanced_android.iml
