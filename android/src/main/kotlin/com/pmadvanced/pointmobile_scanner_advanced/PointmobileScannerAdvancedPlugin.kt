@@ -54,7 +54,9 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
         private var mBinding: ActivityPluginBinding? = null
         private var mScanResultReceiver: ScanResultReceiver? = null
         const val TAG = "PMAdvanced"
-        const val onDecode = "onDecode";
+        const val onDecode = "onDecode"
+        const val BRAND = "POINTMOBILE"
+        val DEVICE_LIST: List<String> =  listOf("PM30","PM67","PM75","PM86","PM84","PT11","PM85", "PM90","PM95", "PM80", "PM67", "PM66", "PM60", "PM550", "PM450", "PM451", "PM45", "PM3", "PM260","PM351","PMRF300","PMRF750","PMRF851","PMRF900",)
 
         // var customIntentCategory = "android.intent.category.DEFAULT"
         const val onClipboardPaste = "onClipboardPaste";
@@ -996,16 +998,9 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
         }
     }
 
-
     private fun isDevicePointMobileRaw(result: Result): Boolean {
-        var majorNumber = ""
-        try {
-            majorNumber = DeviceServer.getIDeviceService().majorNumber.toString()
-        } catch (e: Throwable) {
-            e.printStackTrace()
-        }
-        return majorNumber != ""
+            val brand = Build.BRAND.toString()
+            val model = Build.MODEL.toString()
+        return  BRAND == brand && DEVICE_LIST.contains(model)
     }
-
-
 }
