@@ -162,6 +162,27 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
                 "This plugin can only be used in PointMobile devices"
             )
         }
+
+        if(call.method  == "listenClipboard")
+        {
+            listenClipboard(result)
+            return
+        }
+        if(call.method == "stopListeningClipboard")
+        {
+            stopListeningClipboard(result)
+            return
+        }
+        if(call.method == "clearClipboard")
+        {
+            clearClipboard(result)
+            return
+        }
+        if(call.method == "clearClipboardWithoutListening")
+        {
+            clearClipboardWithoutListening(result)
+            return
+        }
         if (call.method != "initializeScanner")
             if (mScanner == null) {
                 result.error(
@@ -170,6 +191,7 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
                     "Scanner has to be initialized first"
                 )
             }
+
 
         when (call.method) {
             "setDecodeEnabled" -> setDecodeEnabled(
@@ -213,10 +235,7 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
 
             "initializeScanner" -> initializeScanner(call.arguments<Int>() ?: 0, result)
             "setResultType" -> setResultType(call.arguments<Int>() ?: 0, result)
-            "listenClipboard" -> listenClipboard(result)
-            "stopListeningClipboard" -> stopListeningClipboard(result)
-            "clearClipboard" -> clearClipboard(result)
-            "clearClipboardWithoutListening" -> clearClipboardWithoutListening(result)
+
             "setAutoScanInterval" -> setAutoScanInterval(
                 call.arguments<Double>() ?: 1.0,
 
