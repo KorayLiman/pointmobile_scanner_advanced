@@ -1,3 +1,15 @@
+## 0.0.13
+
+* Revert clipboard changes
+
+## 0.0.12
+
+* Clipboard utils bug fix
+
+## 0.0.11
+
+* Clipboard utils now are independent from is device PM checks
+
 ## 0.0.10
 
 * Removed plugin_platform_interface
