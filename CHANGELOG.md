@@ -1,3 +1,7 @@
+## 0.0.12
+
+- Clipboard utils bug fix
+
 ## 0.0.11
 
 - Clipboard utils now are independent from is device PM checks

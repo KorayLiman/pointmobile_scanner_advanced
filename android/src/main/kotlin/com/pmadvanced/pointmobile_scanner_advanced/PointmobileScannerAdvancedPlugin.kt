@@ -154,15 +154,6 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
             return
         }
 
-        if (!isDevicePointMobileRaw(result)) {
-            Log.d(TAG, "Device is not a PDA")
-            result.error(
-                "Device Type Error",
-                "-----THIS PLUGIN MEANT TO BE USED IN POINTMOBILE DEVICES----",
-                "This plugin can only be used in PointMobile devices"
-            )
-        }
-
         if(call.method  == "listenClipboard")
         {
             listenClipboard(result)
@@ -183,6 +174,17 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
             clearClipboardWithoutListening(result)
             return
         }
+
+        if (!isDevicePointMobileRaw(result)) {
+            Log.d(TAG, "Device is not a PDA")
+            result.error(
+                "Device Type Error",
+                "-----THIS PLUGIN MEANT TO BE USED IN POINTMOBILE DEVICES----",
+                "This plugin can only be used in PointMobile devices"
+            )
+        }
+
+
         if (call.method != "initializeScanner")
             if (mScanner == null) {
                 result.error(

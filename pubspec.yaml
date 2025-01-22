@@ -1,6 +1,6 @@
 name: pointmobile_scanner_advanced
 description: A Flutter plugin to manage Scanner for Pointmobile devices. You can scan barcodes, get barcode information and customize built-in scanner settings through code.
-version: 0.0.11
+version: 0.0.12
 repository: https://github.com/KorayLiman/pointmobile_scanner_advanced
 issue_tracker: https://github.com/KorayLiman/pointmobile_scanner_advanced/issues
 
