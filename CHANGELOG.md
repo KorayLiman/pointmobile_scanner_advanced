@@ -1,3 +1,7 @@
+## 0.0.15
+
+- A bug fixed for plugin not recognizing latest PM devices
+
 ## 0.0.14
 
 - On newer android versions "Accessing Hidden Api" bug is fixed

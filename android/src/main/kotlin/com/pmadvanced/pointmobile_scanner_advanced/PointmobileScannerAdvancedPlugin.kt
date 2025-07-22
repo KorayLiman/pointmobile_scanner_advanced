@@ -1000,7 +1000,6 @@ class PointmobileScannerAdvancedPlugin : FlutterPlugin, MethodCallHandler, Activ
 
     private fun isDevicePointMobileRaw(result: Result): Boolean {
             val brand = Build.BRAND.toString()
-            val model = Build.MODEL.toString()
-        return  BRAND == brand && DEVICE_LIST.contains(model)
+            return  BRAND == brand
     }
 }
